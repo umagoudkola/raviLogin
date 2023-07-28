@@ -13,7 +13,7 @@ pec:
   spec: 
     containers:
     - name: koti
-      image: umagoudkola/umak:v7
+      image: umagoudkola/kotiu:v1
       imagePullPolicy: Always
       ports:
       - containerPort: 8080
