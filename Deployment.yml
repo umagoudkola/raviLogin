@@ -1,32 +1,37 @@
-pec:
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: koti-deployment
+spec:
  replicas: 2
  strategy: 
     type: Recreate
  selector: 
    matchLabels: 
-     app: koti
+     app: koti-koti
  template:
   metadata:
-   name: koti
+   name: koti-kotipod
    labels:
-     app: kotikoti	 
+     app: koti-koti	 
   spec: 
     containers:
-    - name: koti
+    - name: koti-koti
       image: umagoudkola/kotiu:v1
       imagePullPolicy: Always
       ports:
       - containerPort: 8080
-----
-api version: v1
-kind: service
+---
+apiVersion: v1
+kind: Service
 metadata:
-   name: koti-service
-   labels:
-     app: kotikoti	 
-  spec:
-type : Nodeport
-selector :
-app: koti
-- port :80
-targetport : 8080
+ name: koti-service
+spec:
+  type: NodePort
+  selector:
+   app: koti-koti
+  ports:
+   - port: 80
+     targetPort: 8080
+...
