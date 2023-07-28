@@ -1,0 +1,32 @@
+pec:
+ replicas: 2
+ strategy: 
+    type: Recreate
+ selector: 
+   matchLabels: 
+     app: koti
+ template:
+  metadata:
+   name: koti
+   labels:
+     app: kotikoti	 
+  spec: 
+    containers:
+    - name: koti
+      image: umagoudkola/umak:v7
+      imagePullPolicy: Always
+      ports:
+      - containerPort: 8080
+----
+api version: v1
+kind: service
+metadata:
+   name: koti-service
+   labels:
+     app: kotikoti	 
+  spec:
+type : Nodeport
+selector :
+app: koti
+- port :80
+targetport : 8080
